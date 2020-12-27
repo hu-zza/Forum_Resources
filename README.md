@@ -1,3 +1,3 @@
 # Forum Resources
 
-Attachements to my posts. Simple and persistent. ;-)
+Attachments to my posts. Simple and persistent. ;-)
