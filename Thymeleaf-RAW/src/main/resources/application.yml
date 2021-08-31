@@ -2,4 +2,6 @@ spring:
   thymeleaf:
     cache: false
     mode: RAW
+
+    # https://github.com/thymeleaf/thymeleaf/issues/606
     suffix: .raw
