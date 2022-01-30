@@ -1,0 +1,17 @@
+Welcome! I think you have two options: []() and [DeepL Translator](https://www.deepl.com/translator) :-)
+Some important/interesting article about these situations:
+[Non-English Question Policy](https://stackoverflow.blog/2009/07/23/non-english-question-policy/),
+[Can’t We All be Reasonable and Speak English?](https://stackoverflow.blog/2014/02/13/cant-we-all-be-reasonable-and-speak-english/)
+
+[Stack Overflow em Português](https://pt.stackoverflow.com/)
+[Stack Overflow en español](https://es.stackoverflow.com/)
+[Stack Overflow на русском](https://ru.stackoverflow.com/)
+[スタック・オーバーフロー](https://ja.stackoverflow.com/)
+
+
+Well, I understand you. All beginnings are hard, especially in programming.
+But don't be angry, this site is about short and focused questions and answers.
+That's why they voted you down. I don't believe in it (and I never use it),
+because of my pedagogical viewpoint, but this is necessary to maintain this
+huge portal. However, I suggest you again to join an online course.
+For example: [Hyperskill](https://hyperskill.org/)

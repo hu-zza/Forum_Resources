@@ -1,0 +1,61 @@
+Nem emlékszem, hogy hol olvastam / hallottam, hogy csak annyit rendez (jelen esetben szitál), amennyi még nem túl költséges, így most félig én merültem bele...
+
+A lényeg: A peek() és a poll(), illetve az element() és a remove() párosokon kívül nem garantált, hogy rendezetten érkeznek az elemek.
+
+TLDR;
+
+Így egész meglepő sorrendet adhat vissza elég sok metódus:
+forEach, iterator, spliterator, toArray, stream
+
+A felszín kapargatása gyanánt két rövid teszt elérhető itt:
+https://replit.com/@huzz4/PriorityQueue-and-sifting
+
+Vagy itt:
+https://www.codiva.io/p/9adc60f3-765b-44cb-9fa7-0f4fe47e09f4
+
+
+S amit látunk:                                                        // már amennyire értem
+
+Példányosításkor a legkisebb elem a helyére kerül mindenképp:
+https://zza.hu/perma/Java_SE_11_PriorityQueue::heapify
+
+A poll() pedig minden meghívásakor szitálással fenntartja a rendet.
+Legalábbis ami az érdemi részt, a queue elejét illeti:
+https://zza.hu/perma/Java_SE_11_PriorityQueue::poll
+
+Viszont a siftDown (és az alá tartozó metódusok) csak a queue első felét piszkálják:
+https://zza.hu/perma/Java_SE_11_PriorityQueue::siftDown
+
+Így alakul ki az az érdekes összevissza rendszer, ami az első tesztben megfigyelhető. (Például, hogy a queue tartalmát képező Object tömb utolsó eleme gyakran beugrik egészen előre ameddig nem elég kicsi és rendezett az egész adatszerkezet.)
+
+A másodikban már nyoma sincs a szitálásnak, mert ott mindig az utolsó elemet "bántom". S így nyugodtan megúszhatjuk "olcsón" rendezgetést:
+https://zza.hu/perma/Java_SE_11_PriorityQueue::removeAt
+
+Nem mondom, egyszer elmerülnék ebben mélyebben is, de előbb egy kiadós matematikai alapozás is rám férne... :-D
+
+
+---
+
+Az én homályos emlékeimben sem szerepelt ilyen VIP funkcionalitás. :-)
+
+Comparator híján az elemek természetes sorrendjét veszi alapul (növekvő sorrendben): https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/PriorityQueue.html
+
+A természetes sorrend a Comparable interfészt implementáló osztályoknál értelmezhető (a "compareTo"-ra hivatkoznak "natural comparison method"-ként is): https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Comparable.html
+
+---
+
+Na jó, fogadom, hogy eztán ha a dokumentáció alapján megakadok, akkor fel fogom eztán túrni az issue-kat (is). :-D
+
+A spring.thymeleaf.mode mellett a spring.thymeleaf.suffix is módosítandó, mert különben felülírja a fájlnév alapú módválasztás:
+https://github.com/thymeleaf/thymeleaf/issues/606
+
+De még mielőtt rábukkantam erre, készítettem egy RestController-es, egyedi template resolver-es megoldást is. A tesztprojektem a két módszerrel:
+https://zza.hu/*forum/Thymeleaf-RAW
+
+---
+
+Nekem a szimpla data.sql szépen működik IntelliJ alól, viszont előbb hajtódik végre, mint a táblák automatikus legyártása a Hibernate által. Így ha indításkor nincs még előkészített adatbázis (pl.: jdbc:h2:mem: ... ), akkor elszáll szépen.
+
+A data.sql mintájára lehet készíteni egy másik scriptfájlt a táblák létrehozására (schema.sql) vagy késleltetni az adatforrás inicializálását. Ez utóbbit nem javasolják mert kevert forrást eredményez (https://docs.spring.io/spring-boot/docs/current/reference/html/howto.html#howto.data-initialization.using-basic-sql-scripts).
+
+De számomra mégiscsak szimpatikus, ha csak gyorsan kell valami tesztadatbázis, ami mindig tiszta adathalmazzal indít. application.properties -> spring.jpa.defer-datasource-initialization = true  (S a Hibernate létrehoz mindent, majd lefut a data.sql).
